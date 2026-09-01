@@ -4,6 +4,7 @@ import "./globals.css";
 import { AudioProvider } from "@/components/context/AudioContext";
 import { LoadingProvider } from "@/components/context/LoadingContext";
 import LoadingScreen from "@/components/ui/LoadingScreen";
+import PageTransitionSound from "@/components/ui/PageTransitionSound";
 
 const permanentMarker = Permanent_Marker({
   weight: "400",
@@ -53,6 +54,7 @@ export default function RootLayout({
         <LoadingProvider>
           <AudioProvider>
             <LoadingScreen />
+            <PageTransitionSound />
             {children}
           </AudioProvider>
         </LoadingProvider>

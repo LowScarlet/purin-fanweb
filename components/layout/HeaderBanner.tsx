@@ -37,7 +37,7 @@ export default function HeaderBanner({
 
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
 
-  const { isPlaying, togglePlay } = useAudio();
+  const { notifyVideoPlay, notifyVideoEnd } = useAudio();
 
   /*
    * ------------------------------------------------------------
@@ -72,9 +72,8 @@ export default function HeaderBanner({
    */
 
   const handleStartVideo = useCallback(() => {
-    if (isPlaying) {
-      togglePlay();
-    }
+    // Automatically pause background music when video begins
+    notifyVideoPlay();
 
     setIsPlayingVideo(true);
 
@@ -90,7 +89,7 @@ export default function HeaderBanner({
 
       setIsMuted(false);
     }, 100);
-  }, [isPlaying, togglePlay, sendYouTubeCommand]);
+  }, [notifyVideoPlay, sendYouTubeCommand]);
 
   /*
    * ------------------------------------------------------------
@@ -100,7 +99,9 @@ export default function HeaderBanner({
 
   const handleStopVideo = useCallback(() => {
     setIsPlayingVideo(false);
-  }, []);
+    // Automatically resume background music when video ends / closes
+    notifyVideoEnd();
+  }, [notifyVideoEnd]);
 
   /*
    * ------------------------------------------------------------
@@ -141,6 +142,9 @@ export default function HeaderBanner({
       sendYouTubeCommand("setPlaybackQuality", ["hd720"]);
       sendYouTubeCommand("setSuggestedQuality", ["hd720"]);
 
+      // Pause BGM if video starts playing
+      notifyVideoPlay();
+
       /*
        * On initial page load we want sound.
        *
@@ -152,7 +156,7 @@ export default function HeaderBanner({
         sendYouTubeCommand("setVolume", [100]);
       }
     }, 300);
-  }, [isMuted, sendYouTubeCommand]);
+  }, [isMuted, notifyVideoPlay, sendYouTubeCommand]);
 
   /*
    * ------------------------------------------------------------
@@ -194,6 +198,8 @@ export default function HeaderBanner({
           if (state === 0) {
             handleStopVideo();
           } else if (state === 1) {
+            // Pause BGM while video is actively playing
+            notifyVideoPlay();
             // Enforce HD 720p / large quality on active stream
             sendYouTubeCommand("setPlaybackQuality", ["hd720"]);
             sendYouTubeCommand("setSuggestedQuality", ["hd720"]);
@@ -209,7 +215,7 @@ export default function HeaderBanner({
     return () => {
       window.removeEventListener("message", handleMessage);
     };
-  }, [handleStopVideo]);
+  }, [handleStopVideo, notifyVideoPlay, sendYouTubeCommand]);
 
   /*
    * ------------------------------------------------------------
@@ -242,6 +248,18 @@ export default function HeaderBanner({
 
     return () => clearTimeout(timer);
   }, [isPlayingVideo, canPlayVideo]);
+
+  /*
+   * ------------------------------------------------------------
+   * Resume BGM instantly when navigating away from Home page
+   * ------------------------------------------------------------
+   */
+
+  useEffect(() => {
+    return () => {
+      notifyVideoEnd();
+    };
+  }, [notifyVideoEnd]);
 
   /*
    * ------------------------------------------------------------

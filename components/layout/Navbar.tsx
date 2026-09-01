@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -30,8 +30,28 @@ export default function Navbar() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { isPlaying, volume, togglePlay, setVolume } = useAudio();
   const { isLoading, isInitialLoad } = useLoading();
+
+  useEffect(() => {
+    let ticking = false;
+
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setIsScrolled(window.scrollY > 20);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <motion.header
@@ -44,29 +64,51 @@ export default function Navbar() {
           : { opacity: 1, y: 0 }
       }
       transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      className="z-30 w-full bg-white border-b border-[#c38a76]/20 select-none"
+      className={`sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-[#c38a76]/20 select-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        isScrolled ? "shadow-md bg-white/98" : "shadow-xs"
+      }`}
     >
-      <div className="flex justify-between items-center bg-white px-8 py-6 font-semibold text-neutral-500 text-sm uppercase">
+      <div
+        className={`flex justify-between items-center bg-transparent px-6 sm:px-8 font-semibold text-neutral-500 uppercase transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+          isScrolled ? "py-2 sm:py-3 h-14 sm:h-16" : "py-5 sm:py-6 h-20 sm:h-[88px]"
+        }`}
+      >
         {/* Left: Brand Logo + NavLinks right next to it */}
-        <div className="flex items-center space-x-4">
-          <Link href="/" className="flex items-center space-x-2 me-8 group">
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          <Link
+            href="/"
+            className="flex items-center space-x-2 me-4 sm:me-8 group origin-left transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              transform: isScrolled ? "scale(0.92)" : "scale(1)",
+            }}
+          >
             <motion.div
               whileHover={{ rotate: 8, scale: 1.15 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 15 }}
             >
-              <LuCat className="text-4xl text-[#694231] transition-colors group-hover:text-[#c38a76]" />
+              <LuCat
+                className={`text-[#694231] transition-colors duration-300 group-hover:text-[#c38a76] ${
+                  isScrolled ? "text-3xl sm:text-3.5xl" : "text-3xl sm:text-4xl"
+                }`}
+              />
             </motion.div>
             <div className="text-xs normal-case">
-              <h1 className="font-bold font-marker text-base text-[#694231] leading-none group-hover:text-[#c38a76] transition-colors">
+              <h1 className="font-bold font-marker text-base sm:text-lg text-[#694231] leading-none group-hover:text-[#c38a76] transition-colors duration-300">
                 Purin Kokoa
               </h1>
-              <p className="text-[0.6em] italic text-[#c38a76]">@purinkokoa_</p>
+              <p className="text-[0.65em] italic text-[#c38a76]">
+                @purinkokoa_
+              </p>
             </div>
           </Link>
 
           {/* NavLinks positioned directly beside the brand logo */}
-          <div className="hidden md:flex space-x-8">
+          <div
+            className={`hidden md:flex items-center transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isScrolled ? "space-x-5 text-xs" : "space-x-8 text-sm"
+            }`}
+          >
             {navLinks.map((item) => {
               const isActive = pathname === item.href || pathname.startsWith(item.href + "/");
               return (
@@ -92,11 +134,22 @@ export default function Navbar() {
         </div>
 
         {/* Right: Share, Divider, Sound Controls */}
-        <div className="hidden md:flex items-center">
+        <div
+          className="hidden md:flex items-center origin-right transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{
+            transform: isScrolled ? "scale(0.92)" : "scale(1)",
+          }}
+        >
           {/* Share Section */}
           <div className="flex items-center">
-            <p className="text-xs font-semibold tracking-wider">SHARE</p>
-            <div className="flex gap-x-4 text-2xl ms-8">
+            <p className="font-semibold tracking-wider text-xs">
+              SHARE
+            </p>
+            <div
+              className={`flex transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isScrolled ? "gap-x-3 text-xl ms-5" : "gap-x-4 text-2xl ms-8"
+              }`}
+            >
               {shareIcons.map((item) => (
                 <motion.a
                   key={item.href}
@@ -114,7 +167,13 @@ export default function Navbar() {
           </div>
 
           {/* Vertical Divider */}
-          <div className="mx-8 text-neutral-300">|</div>
+          <div
+            className={`text-neutral-300 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isScrolled ? "mx-5" : "mx-8"
+            }`}
+          >
+            |
+          </div>
 
           {/* Sound Section */}
           <div
@@ -122,8 +181,14 @@ export default function Navbar() {
             onMouseEnter={() => setShowVolumeSlider(true)}
             onMouseLeave={() => setShowVolumeSlider(false)}
           >
-            <p className="text-xs font-semibold tracking-wider">SOUND</p>
-            <div className="flex gap-x-4 text-2xl ms-8">
+            <p className="font-semibold tracking-wider text-xs">
+              SOUND
+            </p>
+            <div
+              className={`flex transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+                isScrolled ? "gap-x-3 text-xl ms-5" : "gap-x-4 text-2xl ms-8"
+              }`}
+            >
               <motion.button
                 onClick={togglePlay}
                 whileHover={{ scale: 1.2, color: "#c38a76" }}
@@ -165,11 +230,13 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="flex md:hidden items-center gap-4">
+        <div className="flex md:hidden items-center gap-3 sm:gap-4">
           <motion.button
             onClick={togglePlay}
             whileTap={{ scale: 0.9 }}
-            className="text-2xl text-neutral-600 hover:text-[#c38a76]"
+            className={`text-neutral-600 hover:text-[#c38a76] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isScrolled ? "text-xl" : "text-2xl"
+            }`}
             aria-label="Toggle sound"
           >
             {isPlaying ? <HiMiniSpeakerWave className="text-[#c38a76]" /> : <HiMiniSpeakerXMark />}
@@ -177,10 +244,16 @@ export default function Navbar() {
           <motion.button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             whileTap={{ scale: 0.9 }}
-            className="text-2xl text-neutral-600 hover:text-[#c38a76]"
+            className={`text-neutral-700 hover:text-[#c38a76] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              isScrolled ? "text-xl" : "text-2xl"
+            }`}
             aria-label="Toggle mobile menu"
           >
-            {mobileMenuOpen ? <CloseIcon className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <CloseIcon className={`${isScrolled ? "w-5 h-5" : "w-6 h-6"} transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]`} />
+            ) : (
+              <Menu className={`${isScrolled ? "w-5 h-5" : "w-6 h-6"} transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]`} />
+            )}
           </motion.button>
         </div>
       </div>

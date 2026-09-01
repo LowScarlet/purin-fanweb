@@ -55,8 +55,8 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen flex flex-col justify-between bg-[#fffcf8]">
-      {/* 1. HERO BANNER AREA (Exact 100dvh minus Navbar height for pixel-perfect edge alignment) */}
-      <div className="flex flex-col justify-between h-[calc(100dvh-80px)] sm:h-[calc(100dvh-88px)] w-full bg-[#fffcf8] overflow-hidden">
+      {/* 1. HERO BANNER AREA (Compact on mobile, exact 100dvh minus Navbar on desktop) */}
+      <div className="flex flex-col justify-between h-[48vh] min-h-[300px] sm:h-[calc(100dvh-88px)] w-full bg-[#fffcf8] overflow-hidden transition-all duration-300">
         <HeaderBanner videoId={activeVideoId} />
         <AnnouncementBar streams={schedule} />
       </div>

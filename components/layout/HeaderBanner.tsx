@@ -378,9 +378,9 @@ export default function HeaderBanner({
                 }}
                 title="Tutup Video (Kembali ke Wallpaper)"
                 aria-label="Tutup Video"
-                className="w-10 h-10 rounded-full bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/25 shadow-xl flex items-center justify-center cursor-pointer transition-colors group"
+                className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/80 hover:bg-black text-white backdrop-blur-md border border-white/25 shadow-xl flex items-center justify-center cursor-pointer transition-colors group"
               >
-                <X className="w-5 h-5 text-white group-hover:text-[#fcaa94] transition-colors" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5 text-white group-hover:text-[#fcaa94] transition-colors" />
               </motion.button>
 
             </div>
@@ -418,9 +418,9 @@ export default function HeaderBanner({
             }}
             title="Play Video (With Sound)"
             aria-label="Play YouTube Stream"
-            className="pointer-events-auto w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/85 hover:bg-white text-red-600 backdrop-blur-md border-2 border-white/90 shadow-2xl ring-4 ring-white/40 hover:ring-red-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 group"
+            className="pointer-events-auto w-14 h-14 sm:w-20 sm:h-20 rounded-full bg-white/85 hover:bg-white text-red-600 backdrop-blur-md border-2 border-white/90 shadow-2xl ring-4 ring-white/40 hover:ring-red-400/50 flex items-center justify-center cursor-pointer transition-all duration-300 group"
           >
-            <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-red-600 text-red-600 ml-1 group-hover:scale-110 transition-transform" />
+            <Play className="w-6 h-6 sm:w-9 sm:h-9 fill-red-600 text-red-600 ml-0.5 sm:ml-1 group-hover:scale-110 transition-transform" />
           </motion.button>
 
         </div>
@@ -430,7 +430,7 @@ export default function HeaderBanner({
           BOTTOM CONTENT
       ========================================================= */}
 
-      <div className="absolute bottom-2.5 left-3 right-3 sm:bottom-3.5 sm:left-6 sm:right-6 flex items-end justify-between z-20 pointer-events-none">
+      <div className="absolute bottom-1.5 left-2 right-2 sm:bottom-3.5 sm:left-6 sm:right-6 flex items-end justify-between z-20 pointer-events-none">
 
         {/* CAROUSEL */}
 
@@ -476,7 +476,7 @@ export default function HeaderBanner({
             href="/about"
             className="block relative"
           >
-            <div className="relative w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full overflow-hidden border-2 border-white/95 shadow-lg bg-[#fff8f3] group-hover:border-[#fcaa94] group-hover:scale-105 transition-all duration-300 ring-2 ring-[#694231]/20">
+            <div className="relative w-11 h-11 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-full overflow-hidden border-2 border-white/95 shadow-lg bg-[#fff8f3] group-hover:border-[#fcaa94] group-hover:scale-105 transition-all duration-300 ring-2 ring-[#694231]/20">
 
               <Image
                 src={ppImage}

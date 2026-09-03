@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronRight, Radio, Calendar, ExternalLink } from "lucide-react";
 import { ScheduleItem } from "../../lib/types/schedule";
 import { useLoading } from "../context/LoadingContext";
+import { useTranslation, useCurrentLocale } from "@/lib/i18n/client";
 
 interface AnnouncementBarProps {
   streams: ScheduleItem[];
@@ -14,6 +15,8 @@ interface AnnouncementBarProps {
 export default function AnnouncementBar({ streams }: AnnouncementBarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoading, isInitialLoad } = useLoading();
+  const { t } = useTranslation("common");
+  const locale = useCurrentLocale();
 
   // Find the most recent or active stream
   const activeStream = streams.find((s) => s.status === "live") || streams[0];
@@ -49,7 +52,7 @@ export default function AnnouncementBar({ streams }: AnnouncementBarProps) {
           <div className="flex items-center gap-2 truncate">
             {activeStream?.status === "live" && (
               <span className="flex items-center gap-1 text-[11px] font-extrabold uppercase px-2 py-0.5 bg-red-500 text-white rounded-full animate-pulse shadow-sm">
-                <Radio className="w-3 h-3 animate-spin" /> LIVE
+                <Radio className="w-3 h-3 animate-spin" /> {t("ticker.live")}
               </span>
             )}
             <span className="text-xs sm:text-sm font-medium tracking-wide truncate hover:underline cursor-pointer">
@@ -65,7 +68,7 @@ export default function AnnouncementBar({ streams }: AnnouncementBarProps) {
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-xs sm:text-sm font-semibold tracking-wide whitespace-nowrap hover:text-[#fff8f3] hover:translate-x-0.5 transition-all group shrink-0"
         >
-          <span>View</span>
+          <span>{t("ticker.view")}</span>
           <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </Link>
       </div>
@@ -83,13 +86,13 @@ export default function AnnouncementBar({ streams }: AnnouncementBarProps) {
             <div className="max-w-7xl mx-auto px-4 sm:px-8 py-4">
               <div className="flex items-center justify-between pb-2 mb-3 border-b border-white/10">
                 <span className="text-xs font-bold uppercase tracking-wider text-[#fcaa94] flex items-center gap-1.5">
-                  <Calendar className="w-3.5 h-3.5" /> Recent & Upcoming Streams
+                  <Calendar className="w-3.5 h-3.5" /> {t("ticker.drawerTitle")}
                 </span>
                 <Link
-                  href="/schedule"
+                  href={`/${locale}/schedule`}
                   className="text-xs text-white/80 hover:text-white underline"
                 >
-                  View Full Weekly Schedule →
+                  {t("ticker.viewFull")}
                 </Link>
               </div>
 

@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,8 +7,8 @@ import { Play, X, Volume2, VolumeX } from "lucide-react";
 
 import CanvasParticles from "../ui/CanvasParticles";
 import HeroCarousel from "../home/HeroCarousel";
-import { useAudio } from "../context/AudioContext";
 import { useLoading } from "../context/LoadingContext";
+import { useYouTubePlayer } from "@/lib/hooks/useYouTubePlayer";
 
 import bgImage from "@/public/bg.jpg";
 import ppImage from "@/public/pp.jpg";
@@ -21,245 +20,18 @@ interface HeaderBannerProps {
 export default function HeaderBanner({
   videoId = "3xadHYaLobM",
 }: HeaderBannerProps) {
-  const [isPlayingVideo, setIsPlayingVideo] = useState(true);
-  const [isMuted, setIsMuted] = useState(false);
-  const { canPlayVideo, isLoading, isInitialLoad } = useLoading();
-
-  const videoSrc =
-    `https://www.youtube.com/embed/${videoId}` +
-    `?autoplay=1` +
-    `&mute=0` +
-    `&controls=1` +
-    `&enablejsapi=1` +
-    `&playsinline=1` +
-    `&rel=0` +
-    `&vq=hd720`;
-
-  const iframeRef = useRef<HTMLIFrameElement | null>(null);
-
-  const { notifyVideoPlay, notifyVideoEnd } = useAudio();
-
-  /*
-   * ------------------------------------------------------------
-   * YouTube API helper
-   * ------------------------------------------------------------
-   */
-
-  const sendYouTubeCommand = useCallback(
-    (func: string, args: any[] = []) => {
-      const iframe = iframeRef.current;
-
-      if (!iframe?.contentWindow) {
-        return;
-      }
-
-      iframe.contentWindow.postMessage(
-        JSON.stringify({
-          event: "command",
-          func,
-          args,
-        }),
-        "https://www.youtube.com"
-      );
-    },
-    []
-  );
-
-  /*
-   * ------------------------------------------------------------
-   * Start video
-   * ------------------------------------------------------------
-   */
-
-  const handleStartVideo = useCallback(() => {
-    // Automatically pause background music when video begins
-    notifyVideoPlay();
-
-    setIsPlayingVideo(true);
-
-    /*
-     * User interaction means we can safely request sound & force 720p quality.
-     */
-    setTimeout(() => {
-      sendYouTubeCommand("playVideo");
-      sendYouTubeCommand("setPlaybackQuality", ["hd720"]);
-      sendYouTubeCommand("setSuggestedQuality", ["hd720"]);
-      sendYouTubeCommand("unMute");
-      sendYouTubeCommand("setVolume", [100]);
-
-      setIsMuted(false);
-    }, 100);
-  }, [notifyVideoPlay, sendYouTubeCommand]);
-
-  /*
-   * ------------------------------------------------------------
-   * Stop video
-   * ------------------------------------------------------------
-   */
-
-  const handleStopVideo = useCallback(() => {
-    setIsPlayingVideo(false);
-    // Automatically resume background music when video ends / closes
-    notifyVideoEnd();
-  }, [notifyVideoEnd]);
-
-  /*
-   * ------------------------------------------------------------
-   * Toggle sound
-   * ------------------------------------------------------------
-   */
-
-  const toggleVideoSound = useCallback(() => {
-    if (isMuted) {
-      sendYouTubeCommand("unMute");
-      sendYouTubeCommand("setVolume", [100]);
-
-      setIsMuted(false);
-    } else {
-      sendYouTubeCommand("mute");
-
-      setIsMuted(true);
-    }
-  }, [isMuted, sendYouTubeCommand]);
-
-  /*
-   * ------------------------------------------------------------
-   * Iframe loaded
-   * ------------------------------------------------------------
-   */
-
-  const handleIframeLoad = useCallback(() => {
-    /*
-     * Give YouTube a tiny amount of time to initialize
-     * before sending commands.
-     */
-    setTimeout(() => {
-      if (!iframeRef.current) {
-        return;
-      }
-
-      sendYouTubeCommand("playVideo");
-      sendYouTubeCommand("setPlaybackQuality", ["hd720"]);
-      sendYouTubeCommand("setSuggestedQuality", ["hd720"]);
-
-      // Pause BGM if video starts playing
-      notifyVideoPlay();
-
-      /*
-       * On initial page load we want sound.
-       *
-       * Browser policy may still reject this.
-       * That's okay, the iframe itself remains visible.
-       */
-      if (!isMuted) {
-        sendYouTubeCommand("unMute");
-        sendYouTubeCommand("setVolume", [100]);
-      }
-    }, 300);
-  }, [isMuted, notifyVideoPlay, sendYouTubeCommand]);
-
-  /*
-   * ------------------------------------------------------------
-   * Detect YouTube player states & enforce quality
-   * ------------------------------------------------------------
-   */
-
-  useEffect(() => {
-    const handleMessage = (event: MessageEvent) => {
-      if (
-        event.origin !== "https://www.youtube.com" &&
-        event.origin !== "https://www.youtube-nocookie.com"
-      ) {
-        return;
-      }
-
-      try {
-        const data =
-          typeof event.data === "string"
-            ? JSON.parse(event.data)
-            : event.data;
-
-        /*
-         * YouTube player state:
-         *
-         * -1 unstarted
-         *  0 ended
-         *  1 playing
-         *  2 paused
-         *  3 buffering
-         *  5 cued
-         */
-
-        const state =
-          data?.info ??
-          data?.data;
-
-        if (data?.event === "onStateChange") {
-          if (state === 0) {
-            handleStopVideo();
-          } else if (state === 1) {
-            // Pause BGM while video is actively playing
-            notifyVideoPlay();
-            // Enforce HD 720p / large quality on active stream
-            sendYouTubeCommand("setPlaybackQuality", ["hd720"]);
-            sendYouTubeCommand("setSuggestedQuality", ["hd720"]);
-          }
-        }
-      } catch {
-        // Ignore invalid postMessage data.
-      }
-    };
-
-    window.addEventListener("message", handleMessage);
-
-    return () => {
-      window.removeEventListener("message", handleMessage);
-    };
-  }, [handleStopVideo, notifyVideoPlay, sendYouTubeCommand]);
-
-  /*
-   * ------------------------------------------------------------
-   * Tell YouTube we want player events
-   * ------------------------------------------------------------
-   */
-
-  useEffect(() => {
-    if (!isPlayingVideo || !canPlayVideo) {
-      return;
-    }
-
-    /*
-     * YouTube requires initialization message when using
-     * enablejsapi=1.
-     */
-    const timer = setTimeout(() => {
-      if (!iframeRef.current?.contentWindow) {
-        return;
-      }
-
-      iframeRef.current.contentWindow.postMessage(
-        JSON.stringify({
-          event: "listening",
-          id: "youtube-banner-player",
-        }),
-        "https://www.youtube.com"
-      );
-    }, 400);
-
-    return () => clearTimeout(timer);
-  }, [isPlayingVideo, canPlayVideo]);
-
-  /*
-   * ------------------------------------------------------------
-   * Resume BGM instantly when navigating away from Home page
-   * ------------------------------------------------------------
-   */
-
-  useEffect(() => {
-    return () => {
-      notifyVideoEnd();
-    };
-  }, [notifyVideoEnd]);
+  const { isLoading, isInitialLoad } = useLoading();
+  const {
+    iframeRef,
+    videoSrc,
+    isPlayingVideo,
+    isMuted,
+    canPlayVideo,
+    handleStartVideo,
+    handleStopVideo,
+    toggleVideoSound,
+    handleIframeLoad,
+  } = useYouTubePlayer({ videoId });
 
   /*
    * ------------------------------------------------------------
@@ -268,7 +40,7 @@ export default function HeaderBanner({
    */
 
   return (
-    <section className="relative w-full flex-1 min-h-0 overflow-hidden select-none bg-[#fffcf8]">
+    <section className="relative w-full aspect-[16/9] sm:aspect-auto sm:flex-1 min-h-0 overflow-hidden select-none bg-[#fffcf8]">
 
       {/* ========================================================
           BACKGROUND
@@ -305,7 +77,17 @@ export default function HeaderBanner({
             transition={{ duration: 0.4 }}
             className="absolute inset-0 z-30 overflow-hidden w-full h-full"
           >
-            <div className="relative w-full h-full overflow-hidden flex items-center justify-center pointer-events-auto">
+            <div className="relative w-full h-full overflow-hidden flex items-center justify-center bg-gradient-to-b from-[#24130c] via-[#351c12] to-[#24130c] pointer-events-auto">
+              {/* Ambient Glow Backdrop for Mobile Aspect Bars */}
+              <div className="absolute inset-0 z-0 sm:hidden pointer-events-none overflow-hidden">
+                <Image
+                  src={bgImage}
+                  alt="Ambient Glow"
+                  fill
+                  className="object-cover blur-2xl scale-125 opacity-40"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-[#24130c]/80 via-transparent to-[#24130c]/80" />
+              </div>
 
               <iframe
                 ref={iframeRef}
@@ -315,13 +97,7 @@ export default function HeaderBanner({
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 onLoad={handleIframeLoad}
-                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-0 pointer-events-auto"
-                style={{
-                  width: "100vw",
-                  height: "56.25vw",
-                  minHeight: "100%",
-                  minWidth: "177.78vh",
-                }}
+                className="relative z-10 w-full h-full scale-[1.25] origin-center sm:scale-110 sm:w-[100vw] sm:h-[56.25vw] sm:min-h-full sm:min-w-[177.78vh] sm:absolute sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 border-0 pointer-events-none"
               />
 
             </div>

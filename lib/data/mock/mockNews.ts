@@ -6,7 +6,7 @@ export const mockNews: NewsArticle[] = [
     slug: "purin-official-fanweb-refactor-launch",
     title: "Peluncuran Pembaruan Portal Fanweb Resmi Purin Kokoa!",
     excerpt: "Selamat datang di fanweb Purin Kokoa yang telah diperbarui dengan nuansa warna resmi, jadwal interaktif, dan pemutar audio lo-fi!",
-    content: `Halo semua Cocoanuts! 🎉
+    content: `Halo semua Pururin! 🎉
 
 Hari ini kita merilis pembaruan besar untuk portal fanweb Purin Kokoa! Website ini dirancang khusus untuk mempermudah teman-teman mengikuti aktivitas, jadwal live stream, berita terbaru, serta bergabung dalam komunitas **Purin's Apse**.
 
@@ -16,7 +16,7 @@ Hari ini kita merilis pembaruan besar untuk portal fanweb Purin Kokoa! Website i
 3. **Pusat Komunitas & Discord**: Akses langsung ke server Discord Purin's Apse dan proyek fan art terbaru.
 4. **Pembaruan Visual**: Desain baru dengan palet warna resmi Purin (Peach Coral, Rose Terracotta, dan Deep Cocoa).
 
-Terima kasih atas cinta dan dukungan kalian selalu! Jangan lupa ramaikan hashtag **#PurinLive** dan **#PurinArt** yaa~ 🍮💖`,
+Terima kasih atas cinta dan dukungan kalian selalu! Jangan lupa ramaikan hashtag **#PurON** dan **#Purspectine** yaa~ 🍮💖`,
     category: "Announcement",
     author: "Purin Fan Staff",
     publishedAt: "2026-09-01T00:00:00+07:00",
@@ -29,11 +29,11 @@ Terima kasih atas cinta dan dukungan kalian selalu! Jangan lupa ramaikan hashtag
     slug: "purin-milestone-50k-subscribers",
     title: "Rayakan 50,000 Subscribers di YouTube! ✨",
     excerpt: "Terima kasih banyak atas 50K subscribers! Purin berencana mengadakan stream spesial 3D karaoke dan bagi-bagi wallpaper eksklusif.",
-    content: `Tak terasa keluarga **Cocoanuts** kini sudah mencapai 50,000 subscribers di YouTube! 🎊
+    content: `Tak terasa keluarga **Pururin** kini sudah mencapai 50,000 subscribers di YouTube! 🎊
 
 Sebagai bentuk rasa syukur dan terima kasih dari Purin:
 - Akan diadakan **Special 50K Celebration Stream** minggu depan.
-- Free exclusive wallpaper ilustrasi oleh komunitas fanart.
+- Free exclusive wallpaper ilustrasi oleh komunitas fanart #Purspectine.
 - Sesi tanya jawab dan pembacaan pesan spesial dari Marshmallow.
 
 Pantau terus tab **Schedule** untuk detail jam tayangnya ya!`,

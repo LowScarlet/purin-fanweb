@@ -1,16 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { ScheduleItem, ScheduleStatus } from "../../lib/types/schedule";
-import { Radio, Calendar, Play, Globe, ExternalLink, Filter } from "lucide-react";
+import { ScheduleItem, ScheduleStatus } from "@/lib/types/schedule";
+import { Globe, Filter } from "lucide-react";
 import AnimatedSection from "../ui/AnimatedSection";
+import ScheduleCard from "./ScheduleCard";
+import { useTranslation } from "@/lib/i18n/client";
 
 interface ScheduleClientProps {
   initialSchedule: ScheduleItem[];
 }
 
 export default function ScheduleClient({ initialSchedule }: ScheduleClientProps) {
+  const { t } = useTranslation("schedule");
   const [activeStatus, setActiveStatus] = useState<ScheduleStatus | "all">("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [timezone, setTimezone] = useState<"WIB" | "JST" | "UTC">("WIB");
@@ -18,89 +20,79 @@ export default function ScheduleClient({ initialSchedule }: ScheduleClientProps)
   const categories = ["all", "Gaming", "Chit-Chat", "Handstream", "Karaoke", "Collab"];
 
   const filteredSchedule = initialSchedule.filter((item) => {
-    if (activeStatus !== "all" && item.status !== activeStatus) return false;
+    if (activeStatus !== "all") {
+      if (activeStatus === "archive" && item.status !== "archive" && item.status !== "completed") return false;
+      if (activeStatus !== "archive" && item.status !== activeStatus) return false;
+    }
     if (selectedCategory !== "all" && item.category !== selectedCategory) return false;
     return true;
   });
 
-  const formatStreamTime = (isoString: string) => {
-    const date = new Date(isoString);
-    let offsetHours = 7; // WIB (UTC+7)
-    if (timezone === "JST") offsetHours = 9;
-    if (timezone === "UTC") offsetHours = 0;
-
-    // Convert to target timezone
-    const utc = date.getTime() + date.getTimezoneOffset() * 60000;
-    const targetDate = new Date(utc + 3600000 * offsetHours);
-
-    return {
-      dateFormatted: targetDate.toLocaleDateString("id-ID", {
-        weekday: "long",
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      }),
-      timeFormatted: targetDate.toLocaleTimeString("id-ID", {
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
-    };
-  };
+  const statusTabs = [
+    { id: "all", label: t("status.all") },
+    { id: "live", label: t("status.live") },
+    { id: "upcoming", label: t("status.upcoming") },
+    { id: "archive", label: t("status.archive") },
+  ] as const satisfies ReadonlyArray<{ id: ScheduleStatus | "all"; label: string }>;
 
   return (
     <div className="space-y-8">
-      {/* Controls & Filter Bar */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-5 rounded-2xl bg-white border border-[#c38a76]/20 shadow-sm">
+      {/* --------------------------------------------------------
+          HOLOLIVE FC STYLE PILL CONTROLS & TIMEZONE SWITCHER
+      --------------------------------------------------------- */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-[2.5rem] bg-white border border-[#c38a76]/20 shadow-xl shadow-[#694231]/5">
         {/* Status Tabs */}
         <div className="flex flex-wrap items-center gap-2">
-          {(["all", "live", "upcoming", "completed"] as const).map((status) => (
+          {statusTabs.map((tab) => (
             <button
-              key={status}
-              onClick={() => setActiveStatus(status)}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
-                activeStatus === status
-                  ? "bg-[#694231] text-[#fff8f3] shadow-sm scale-105"
-                  : "bg-[#fff8f3] text-[#694231]/70 hover:bg-[#fedacb]/60"
+              key={tab.id}
+              onClick={() => setActiveStatus(tab.id)}
+              className={`px-4 py-2 rounded-full text-xs font-black uppercase tracking-wider transition-all duration-200 shadow-sm ${
+                activeStatus === tab.id
+                  ? "bg-[#fcaa94] text-[#694231] border border-[#fcaa94] scale-105"
+                  : "bg-white text-[#694231] border border-[#c38a76]/20 hover:bg-[#fff8f3] hover:border-[#fcaa94]"
               }`}
             >
-              {status === "all" ? "Semua" : status}
+              {tab.label}
             </button>
           ))}
         </div>
 
         {/* Timezone Switcher */}
-        <div className="flex items-center gap-2 text-xs font-bold text-[#694231]">
-          <Globe className="w-3.5 h-3.5 text-[#c38a76]" />
-          <span>Zona Waktu:</span>
-          {(["WIB", "JST", "UTC"] as const).map((tz) => (
-            <button
-              key={tz}
-              onClick={() => setTimezone(tz)}
-              className={`px-2.5 py-1 rounded-md text-xs font-bold transition-all ${
-                timezone === tz
-                  ? "bg-[#fcaa94] text-[#694231]"
-                  : "bg-black/5 hover:bg-black/10 text-black/60"
-              }`}
-            >
-              {tz}
-            </button>
-          ))}
+        <div className="flex items-center gap-2 text-xs font-black text-[#694231]">
+          <Globe className="w-4 h-4 text-[#c38a76]" />
+          <span>{t("timezone")}</span>
+          <div className="flex items-center gap-1.5">
+            {(["WIB", "JST", "UTC"] as const).map((tz) => (
+              <button
+                key={tz}
+                onClick={() => setTimezone(tz)}
+                className={`px-3 py-1 rounded-full text-xs font-black transition-all shadow-xs ${
+                  timezone === tz
+                    ? "bg-[#694231] text-white"
+                    : "bg-[#fff8f3] hover:bg-[#fedacb]/60 text-[#694231] border border-[#c38a76]/20"
+                }`}
+              >
+                {tz}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Category Pills */}
-      <div className="flex items-center gap-2 overflow-x-auto pb-2">
-        <span className="text-xs font-bold text-[#c38a76] uppercase tracking-wider flex items-center gap-1 shrink-0">
-          <Filter className="w-3 h-3" /> Kategori:
+      <div className="flex items-center gap-2 overflow-x-auto pb-2 px-1">
+        <span className="text-xs font-black text-[#c38a76] uppercase tracking-wider flex items-center gap-1 shrink-0">
+          <Filter className="w-3.5 h-3.5" /> Kategori:
         </span>
         {categories.map((cat) => (
           <button
             key={cat}
             onClick={() => setSelectedCategory(cat)}
-            className={`px-3 py-1 rounded-full text-xs font-semibold whitespace-nowrap transition-colors ${
+            className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all shadow-xs ${
               selectedCategory === cat
-                ? "bg-[#c38a76] text-white"
-                : "bg-white text-[#694231]/70 hover:bg-[#fedacb]/40 border border-[#c38a76]/20"
+                ? "bg-[#c38a76] text-white border border-[#c38a76]"
+                : "bg-white text-[#694231] hover:bg-[#fff8f3] border border-[#c38a76]/20"
             }`}
           >
             {cat === "all" ? "Semua Kategori" : cat}
@@ -108,75 +100,20 @@ export default function ScheduleClient({ initialSchedule }: ScheduleClientProps)
         ))}
       </div>
 
-      {/* Schedule Items Grid with Staggered Entrance */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {filteredSchedule.map((item, idx) => {
-          const { dateFormatted, timeFormatted } = formatStreamTime(item.scheduledAt);
-          return (
-            <AnimatedSection key={item.id} delay={0.08 * idx}>
-              <div
-                className="flex flex-col justify-between p-6 rounded-2xl bg-white border border-[#c38a76]/20 shadow-sm hover:shadow-md hover:border-[#fcaa94] transition-all h-full"
-              >
-                <div>
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="text-xs font-bold uppercase px-3 py-1 rounded-full bg-[#fedacb]/60 text-[#694231] border border-[#fcaa94]/40">
-                      {item.category}
-                    </span>
-
-                    {item.status === "live" ? (
-                      <span className="flex items-center gap-1.5 text-xs font-extrabold uppercase px-3 py-1 rounded-full bg-red-500 text-white animate-pulse">
-                        <Radio className="w-3.5 h-3.5" /> LIVE STREAM
-                      </span>
-                    ) : item.status === "upcoming" ? (
-                      <span className="text-xs font-bold text-[#c38a76] bg-[#fff8f3] px-3 py-1 rounded-full border border-[#fcaa94]/30">
-                        Upcoming
-                      </span>
-                    ) : (
-                      <span className="text-xs font-medium text-black/40">
-                        Completed VOD
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="text-base font-bold text-[#694231] leading-snug">
-                    {item.title}
-                  </h3>
-
-                  {item.description && (
-                    <p className="text-xs text-black/60 mt-2 leading-relaxed">
-                      {item.description}
-                    </p>
-                  )}
-                </div>
-
-                <div className="pt-4 mt-4 border-t border-black/5 flex items-center justify-between text-xs">
-                  <div>
-                    <div className="font-bold text-[#694231]">{dateFormatted}</div>
-                    <div className="text-[11px] text-[#c38a76] font-semibold mt-0.5">
-                      {timeFormatted} {timezone}
-                    </div>
-                  </div>
-
-                  <Link
-                    href={item.externalUrl || "https://www.youtube.com/@PurinKokoa_"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#694231] text-[#fff8f3] hover:bg-[#c38a76] font-bold text-xs shadow-sm transition-all hover:scale-105"
-                  >
-                    <Play className="w-3.5 h-3.5 fill-current" />
-                    <span>{item.status === "live" ? "Tonton Live" : "Buka Stream"}</span>
-                  </Link>
-                </div>
-              </div>
-            </AnimatedSection>
-          );
-        })}
+      {/* Schedule Items Grid with Hololive FC Stadium Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {filteredSchedule.map((item, idx) => (
+          <AnimatedSection key={item.id} delay={0.08 * idx}>
+            <ScheduleCard item={item} timezone={timezone} />
+          </AnimatedSection>
+        ))}
       </div>
 
       {filteredSchedule.length === 0 && (
-        <div className="p-12 text-center bg-white rounded-3xl border border-black/5 text-black/50 space-y-2">
-          <p className="text-base font-bold">Tidak ada stream yang sesuai dengan filter.</p>
-          <p className="text-xs">Coba pilih tab status atau kategori yang lain ya~ 🍮</p>
+        <div className="p-12 text-center rounded-[2.5rem] bg-white border border-[#c38a76]/20 shadow-md">
+          <p className="text-sm font-black text-[#694231]">
+            {t("empty")}
+          </p>
         </div>
       )}
     </div>

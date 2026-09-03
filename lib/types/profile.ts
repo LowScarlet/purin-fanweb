@@ -27,6 +27,7 @@ export interface Profile {
   race?: string;
   lore?: string;
   fanName: string;
+  fanMark?: string;
   officialTags: {
     general: string;
     live: string;

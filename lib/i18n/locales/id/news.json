@@ -1,0 +1,18 @@
+{
+  "header": {
+    "badge": "Purin Kokoa News Dispatch",
+    "title": "Berita & Update Terkini 🍮",
+    "desc": "Pengumuman resmi mengenai event, jadwal siaran spesial, peluncuran fanweb, merchandise, dan milestone seputar Purin Kokoa."
+  },
+  "categories": {
+    "all": "SEMUA BERITA",
+    "announcement": "PENGUMUMAN",
+    "milestone": "MILESTONE",
+    "merch": "MERCHANDISE"
+  },
+  "pinned": "PINNED",
+  "readMore": "Baca Selengkapnya",
+  "backToList": "Kembali ke Daftar Berita",
+  "empty": "Belum ada pengumuman dalam kategori ini 🍮",
+  "share": "Bagikan Artikel"
+}

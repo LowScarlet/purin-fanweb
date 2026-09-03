@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "news": "News",
+    "about": "About",
+    "schedule": "Schedule",
+    "community": "Community",
+    "disclaimer": "Disclaimer",
+    "share": "SHARE",
+    "sound": "SOUND",
+    "playBgm": "Play BGM",
+    "muteBgm": "Mute BGM",
+    "volume": "Volume",
+    "menuTitle": "Purin Portal",
+    "menuBadge": "Menu",
+    "bgmPlaying": "BGM Playing",
+    "bgmMuted": "BGM Muted",
+    "social": "Socials:"
+  },
+  "footer": {
+    "contact": "CONTACT",
+    "privacy": "PRIVACY POLICY",
+    "purin": "Purin Kokoa",
+    "copyrightGuidelines": "著作権に関するガイドライン (Copyright Guidelines)",
+    "rights": "All rights reserved."
+  },
+  "ticker": {
+    "live": "LIVE",
+    "view": "View",
+    "drawerTitle": "Recent & Upcoming Streams",
+    "viewFull": "View Full Weekly Schedule →"
+  },
+  "carousel": {
+    "communityTitle": "Purin's Apse",
+    "communitySub": "Join Our Discord Community!",
+    "scheduleTitle": "New Stream Schedule",
+    "scheduleSub": "Check Weekly Live Times & Reminders!",
+    "milestoneTitle": "50,000 Subscribers!",
+    "milestoneSub": "Read the Celebration Announcement"
+  },
+  "loading": {
+    "title": "PURIN KOKOA",
+    "subtitle": "Purin Kokoa • Fan Portal",
+    "preparing": "Preparing Player...",
+    "loading": "Loading...",
+    "quotes": [
+      "Brewing warm cocoa... 🍫",
+      "Preparing caramel pudding... 🍮",
+      "Connecting to Purin's Apse... 🐱",
+      "Arranging miniature furniture... 🪑",
+      "Loading sweet memories with Cocoanuts... ✨"
+    ]
+  },
+  "watermarks": {
+    "fanclub": "PURIN KOKOA OFFICIAL FAN CLUB",
+    "pururinPortal": "PURURIN VTUBER PORTAL",
+    "schedule": "PURIN KOKOA STREAM SCHEDULE",
+    "timetable": "PURURIN LIVE TIMETABLE",
+    "news": "PURIN KOKOA OFFICIAL NEWS",
+    "announcements": "PURURIN ANNOUNCEMENTS",
+    "community": "PURIN'S APSE FAN COMMUNITY",
+    "communityHub": "PURURIN COMMUNITY HUB",
+    "guidelines": "PURIN KOKOA FAN GUIDELINES",
+    "nonCommercial": "NON-COMMERCIAL FAN PROJECT"
+  },
+  "actions": {
+    "copy": "Copy",
+    "copied": "Copied!",
+    "readMore": "Read More",
+    "back": "Back",
+    "join": "Join",
+    "explore": "Explore"
+  }
+}

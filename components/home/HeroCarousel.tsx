@@ -4,43 +4,46 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, Bell, Sparkles } from "lucide-react";
-
-const slides = [
-  {
-    id: 1,
-    title: "Purin's Apse",
-    icon: MessageSquare,
-    subtitle: "Join Our Discord Community!",
-    link: "https://discord.gg/purin",
-    isExternal: true,
-  },
-  {
-    id: 2,
-    title: "New Stream Schedule",
-    icon: Bell,
-    subtitle: "Check Weekly Live Times & Reminders!",
-    link: "/schedule",
-    isExternal: false,
-  },
-  {
-    id: 3,
-    title: "50,000 Subscribers!",
-    icon: Sparkles,
-    subtitle: "Read the Celebration Announcement",
-    link: "/news/purin-milestone-50k-subscribers",
-    isExternal: false,
-  },
-];
+import { useTranslation, useCurrentLocale } from "@/lib/i18n/client";
 
 export default function HeroCarousel() {
+  const { t } = useTranslation("common");
+  const locale = useCurrentLocale();
   const [current, setCurrent] = useState(0);
+
+  const slides = [
+    {
+      id: 1,
+      title: t("carousel.communityTitle"),
+      icon: MessageSquare,
+      subtitle: t("carousel.communitySub"),
+      link: "https://discord.gg/SzvzcQWabE",
+      isExternal: true,
+    },
+    {
+      id: 2,
+      title: t("carousel.scheduleTitle"),
+      icon: Bell,
+      subtitle: t("carousel.scheduleSub"),
+      link: `/${locale}/schedule`,
+      isExternal: false,
+    },
+    {
+      id: 3,
+      title: t("carousel.milestoneTitle"),
+      icon: Sparkles,
+      subtitle: t("carousel.milestoneSub"),
+      link: `/${locale}/news/purin-milestone-50k-subscribers`,
+      isExternal: false,
+    },
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const slide = slides[current];
   const Icon = slide.icon;

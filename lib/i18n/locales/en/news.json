@@ -1,0 +1,18 @@
+{
+  "header": {
+    "badge": "Purin Kokoa News Dispatch",
+    "title": "Latest News & Updates 🍮",
+    "desc": "Official announcements regarding events, special live broadcasts, fanweb releases, merchandise, and Purin Kokoa milestones."
+  },
+  "categories": {
+    "all": "ALL NEWS",
+    "announcement": "ANNOUNCEMENTS",
+    "milestone": "MILESTONES",
+    "merch": "MERCHANDISE"
+  },
+  "pinned": "PINNED",
+  "readMore": "Read More",
+  "backToList": "Back to News List",
+  "empty": "No announcements found in this category 🍮",
+  "share": "Share Article"
+}

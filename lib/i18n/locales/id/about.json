@@ -1,0 +1,54 @@
+{
+  "header": {
+    "badge": "Official Member Reference",
+    "subtitle": "Your Sweet & Cozy Pudding Chocolatier VTuber 🍮🍫"
+  },
+  "specs": {
+    "birthday": "Ulang Tahun",
+    "height": "Tinggi",
+    "debut": "Debut",
+    "fanbase": "Fanbase"
+  },
+  "lore": {
+    "title": "Official Lore & Background",
+    "p1": "Purin Kokoa adalah seorang chocolatier blasteran kucing dan manusia. Dulunya ia adalah seekor kucing terlantar yang diadopsi oleh seorang pemilik toko cokelat yang baik hati.",
+    "p2": "Karena rasa kagum yang mendalam kepada pemiliknya, ia selalu bermimpi menjadi pembuat cokelat dan melayani pelanggan secara langsung. Suatu hari saat berjalan-jalan, ia tersesat di hutan ajaib dan bertemu peri berambut ungu yang menawarkan untuk mewujudkan impian terbesarnya.",
+    "p3": "✨ Ia menerima tawaran tersebut, dan kini ia telah menjadi chocolatier sejati dengan toko cokelatnya sendiri. Mari mampir dan nikmati kehangatan di chocolaterie Purin! 🍮"
+  },
+  "reference": {
+    "title": "Character Reference Sheet",
+    "desc": "Desain resmi model VTuber Purin Kokoa: Pandangan depan, samping, belakang, aksesoris pita cokelat, dan ekspresi wajah.",
+    "openOriginal": "Buka Resolusi Asli",
+    "clickZoom": "Klik untuk Zoom Resolusi Penuh"
+  },
+  "palette": {
+    "title": "Official Color Palette",
+    "badge": "Klik untuk Salin",
+    "desc": "Panduan kode warna resmi untuk pembuatan fanart, grafis, dan aset komunitas Purin Kokoa. Klik untuk menyalin kode hex.",
+    "peach": "Peach Coral (Aksen Utama)",
+    "terracotta": "Rose Terracotta (Sekunder)",
+    "cocoa": "Deep Cocoa (Warna Dasar)"
+  },
+  "hashtags": {
+    "title": "Official Hashtags & Fanmark",
+    "badge": "Klik untuk Salin",
+    "desc": "Gunakan tag berikut saat berbagi konten, fanart, atau menonton live stream bersama Purin!",
+    "general": "Tag Umum",
+    "live": "Live Stream",
+    "fanart": "Fanart / Karya",
+    "clips": "Klip & Shorts",
+    "mark": "Fanmark Resmi"
+  },
+  "soundboard": {
+    "title": "Voice Clips & Soundboard",
+    "badge": "Klik untuk Memutar",
+    "desc": "Koleksi sapaan khas, reaksi lucu, dan meme streaming Purin Kokoa. Klik untuk mendengarkan efek suara!"
+  },
+  "rules": {
+    "title": "Streaming Rules & Etiquette",
+    "desc": "Panduan menikmati live stream Purin Kokoa secara nyaman, tertib, dan ramah untuk seluruh keluarga Pururin:"
+  },
+  "journey": {
+    "title": "Journey & Milestones"
+  }
+}

@@ -1,4 +1,4 @@
-export type ScheduleStatus = "upcoming" | "live" | "completed";
+export type ScheduleStatus = "upcoming" | "live" | "archive" | "completed";
 
 export interface ScheduleItem {
   id: string;

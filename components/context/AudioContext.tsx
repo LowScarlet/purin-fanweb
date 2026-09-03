@@ -39,19 +39,20 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
   const sfxRef = useRef<HTMLAudioElement | null>(null);
   const isVideoPlayingRef = useRef(false);
   const userManuallyPausedRef = useRef(false);
+  const initialVolumeRef = useRef(volume);
 
   // Initialize and configure HTML5 Audio instances for for-u.mp3 and switch.wav
   useEffect(() => {
     if (typeof window !== "undefined") {
       const audio = new Audio("/for-u.mp3");
       audio.loop = true;
-      audio.volume = volume;
+      audio.volume = initialVolumeRef.current;
       audio.preload = "auto";
       audioRef.current = audio;
 
       const sfx = new Audio("/switch.wav");
       sfx.preload = "auto";
-      sfx.volume = Math.min(1, Math.max(0.25, volume * 1.2));
+      sfx.volume = Math.min(1, Math.max(0.25, initialVolumeRef.current * 1.2));
       sfxRef.current = sfx;
 
       audio.onplay = () => setIsPlaying(true);
@@ -192,16 +193,16 @@ export function AudioProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [volume]);
 
-  // Paper flip / page transition sound effect using switch.wav
+  // Paper flip / page transition sound effect using switch.wav (soft subtle volume)
   const playPaperFlipSound = useCallback(() => {
     try {
       if (sfxRef.current) {
         const sfxClone = sfxRef.current.cloneNode() as HTMLAudioElement;
-        sfxClone.volume = Math.min(1, Math.max(0.25, volume * 1.2));
+        sfxClone.volume = Math.min(0.2, Math.max(0.05, volume * 0.35));
         sfxClone.play().catch(() => {});
       } else {
         const sfx = new Audio("/switch.wav");
-        sfx.volume = Math.min(1, Math.max(0.25, volume * 1.2));
+        sfx.volume = Math.min(0.2, Math.max(0.05, volume * 0.35));
         sfx.play().catch(() => {});
       }
     } catch {}

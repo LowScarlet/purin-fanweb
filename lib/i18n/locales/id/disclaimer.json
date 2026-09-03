@@ -1,0 +1,25 @@
+{
+  "header": {
+    "badge": "Legal & Project Notices",
+    "title": "Disclaimer & Pedoman Hak Cipta 🍮",
+    "subtitle": "PURIN KOKOA 著作権に関するガイドライン (Unofficial Fan-made Project Information)"
+  },
+  "sections": {
+    "nature": {
+      "title": "1. Sifat Proyek Fan-Made",
+      "p1": "Website portal ini adalah karya penggemar tidak resmi (unofficial fan-made project) yang dibuat dengan penuh cinta oleh komunitas untuk mengapresiasi dan mendukung VTuber / Content Creator Purin Kokoa.",
+      "p2": "Website ini bersifat non-komersial dan sama sekali tidak terafiliasi secara resmi ataupun mengambil keuntungan finansial langsung dari pihak manajemen/agensi."
+    },
+    "copyright": {
+      "title": "2. Hak Cipta & Kepemilikan Karakter",
+      "p1": "Seluruh hak cipta terkait karakter, desain model VTuber, nama, suara, dan konten live stream adalah milik sah dari Purin Kokoa dan/atau ilustrator/desainer resmi yang bersangkutan.",
+      "p2": "Ilustrasi, fanart, dan aset media yang ditampilkan di situs ini diberikan kredit sesuai pembuat aslinya dan hanya digunakan untuk keperluan promosi komunitas fan."
+    },
+    "takedown": {
+      "title": "3. Permohonan Penurunan Konten (Takedown Request)",
+      "p1": "Jika Anda adalah pemegang hak cipta atau perwakilan resmi dan ingin meminta modifikasi atau penghapusan aset/informasi tertentu dari fanweb ini, silakan hubungi tim developer melalui repositori GitHub resmi atau kontak komunitas."
+    }
+  },
+  "developer": "Pengembang: LowScarlet & Komunitas Pururin 🍮",
+  "github": "GitHub Repository"
+}

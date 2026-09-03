@@ -1,0 +1,24 @@
+{
+  "header": {
+    "badge": "Weekly Live Timetable",
+    "title": "Jadwal Stream Purin Kokoa 🎙️",
+    "desc": "Pantau siaran game horror, chit-chat santai, rakit Gunpla, dan karaoke bersama Pururin dalam zona waktu otomatis."
+  },
+  "status": {
+    "all": "SEMUA",
+    "live": "🔴 LIVE",
+    "upcoming": "UPCOMING",
+    "archive": "VOD ARCHIVE"
+  },
+  "timezone": "Zona Waktu:",
+  "category": "Kategori:",
+  "empty": "Tidak ada siaran dalam filter ini 🎙️",
+  "card": {
+    "liveNow": "LIVE STREAM",
+    "upcoming": "Upcoming",
+    "archive": "VOD Archive",
+    "watchLive": "Tonton Live",
+    "watchVod": "Tonton VOD",
+    "openStream": "Buka Stream"
+  }
+}

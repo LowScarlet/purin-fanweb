@@ -4,7 +4,7 @@ export const mockSchedule: ScheduleItem[] = [
   {
     id: "sch_001",
     title: "Ini Game Horror? 【Panicore!】",
-    description: "Malam ini kita uji nyali main Panicore! Siap-siap denger teriaknya pudding ya guys~",
+    description: "Malam ini kita uji nyali main Panicore! Siap-siap denger scream pudding ya guys~",
     scheduledAt: "2026-09-01T20:00:00+07:00",
     category: "Gaming",
     gameTitle: "Panicore",
@@ -17,7 +17,7 @@ export const mockSchedule: ScheduleItem[] = [
   {
     id: "sch_002",
     title: "【SuRin Time!】 Kebiasaan Kalian Red Flag atau Green Flag sih?",
-    description: "Ngobrol santai bareng Cocoanuts sambil baca cerita-cerita unik kalian di Marshmallow!",
+    description: "Ngobrol santai bareng Pururin sambil baca cerita-cerita unik kalian di Marshmallow!",
     scheduledAt: "2026-09-03T19:30:00+07:00",
     category: "Chit-Chat",
     platform: "YouTube",
@@ -40,11 +40,11 @@ export const mockSchedule: ScheduleItem[] = [
   {
     id: "sch_004",
     title: "【Karaoke Stream】 Cozy Acoustic Night & Singing J-Pop / City Pop",
-    description: "Bernyanyi santai di malam minggu dengan lagu-lagu hangat pilihan Cocoanuts.",
+    description: "Bernyanyi santai di malam minggu dengan lagu-lagu hangat pilihan Pururin.",
     scheduledAt: "2026-09-06T20:30:00+07:00",
     category: "Karaoke",
     platform: "YouTube",
-    externalUrl: "https://www.youtube.com/@PurinKokoa_/streams",
+    externalUrl: "https://www.youtube.com/@PurinKokoa/streams",
     thumbnailUrl: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=600&auto=format&fit=crop&q=80",
     status: "upcoming",
   },
@@ -56,8 +56,8 @@ export const mockSchedule: ScheduleItem[] = [
     category: "Collab",
     gameTitle: "Chained Together",
     platform: "YouTube",
-    externalUrl: "https://www.youtube.com/@PurinKokoa_/streams",
+    externalUrl: "https://www.youtube.com/@PurinKokoa/streams",
     thumbnailUrl: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80",
-    status: "completed",
+    status: "archive",
   },
 ];

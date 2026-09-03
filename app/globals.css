@@ -86,3 +86,93 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #694231;
 }
+
+/* ============================================================
+   LIVELY FESTIVE CONFETTI & DECORATION ANIMATIONS
+============================================================ */
+@keyframes confetti-flutter-1 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-14px) translateX(6px) rotate(4deg);
+  }
+  50% {
+    transform: translateY(-24px) translateX(-4px) rotate(-6deg);
+  }
+  75% {
+    transform: translateY(-10px) translateX(8px) rotate(3deg);
+  }
+}
+
+@keyframes confetti-flutter-2 {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  30% {
+    transform: translateY(18px) translateX(-8px) rotate(-8deg);
+  }
+  60% {
+    transform: translateY(8px) translateX(6px) rotate(5deg);
+  }
+  85% {
+    transform: translateY(22px) translateX(-4px) rotate(-3deg);
+  }
+}
+
+@keyframes confetti-bob-slow {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-18px) scale(1.12);
+  }
+}
+
+@keyframes confetti-sparkle-spin {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.35) rotate(22deg);
+    opacity: 1;
+  }
+}
+
+@keyframes confetti-wiggle {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0px);
+  }
+  25% {
+    transform: rotate(-14deg) translateY(-10px);
+  }
+  75% {
+    transform: rotate(14deg) translateY(8px);
+  }
+}
+
+.animate-flutter-1 {
+  animation: confetti-flutter-1 4.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-flutter-2 {
+  animation: confetti-flutter-2 5.5s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-bob-slow {
+  animation: confetti-bob-slow 3.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-sparkle-spin {
+  animation: confetti-sparkle-spin 2.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-wiggle {
+  animation: confetti-wiggle 3.2s ease-in-out infinite;
+  will-change: transform;
+}

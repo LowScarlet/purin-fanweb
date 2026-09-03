@@ -1,0 +1,24 @@
+{
+  "header": {
+    "badge": "Weekly Live Timetable",
+    "title": "Purin Kokoa Stream Schedule 🎙️",
+    "desc": "Stay tuned for horror gaming, cozy chit-chats, Gunpla building, and karaoke sessions with Pururin in auto-converted timezones."
+  },
+  "status": {
+    "all": "ALL",
+    "live": "🔴 LIVE",
+    "upcoming": "UPCOMING",
+    "archive": "VOD ARCHIVE"
+  },
+  "timezone": "Timezone:",
+  "category": "Category:",
+  "empty": "No streams found in this filter 🎙️",
+  "card": {
+    "liveNow": "LIVE STREAM",
+    "upcoming": "Upcoming",
+    "archive": "VOD Archive",
+    "watchLive": "Watch Live",
+    "watchVod": "Watch VOD",
+    "openStream": "Open Stream"
+  }
+}

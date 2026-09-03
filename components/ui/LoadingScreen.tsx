@@ -5,9 +5,11 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import { useLoading } from "@/components/context/LoadingContext";
+import { useTranslation } from "@/lib/i18n/client";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher";
 import ppImage from "@/public/pp.jpg";
 
-const loadingQuotes = [
+const defaultLoadingQuotes = [
   "Membuat cokelat hangat... 🍫",
   "Menyiapkan pudding karamel... 🍮",
   "Menghubungkan ke Purin's Apse... 🐱",
@@ -17,6 +19,12 @@ const loadingQuotes = [
 
 export default function LoadingScreen() {
   const { isLoading, finishLoading, enableVideoPlay } = useLoading();
+  const { t } = useTranslation("common");
+  const rawQuotes = t("loading.quotes", { returnObjects: true });
+  const loadingQuotes = Array.isArray(rawQuotes) && rawQuotes.length > 0
+    ? (rawQuotes as string[])
+    : defaultLoadingQuotes;
+
   const [progress, setProgress] = useState(0);
   const [quoteIndex, setQuoteIndex] = useState(0);
   const videoTriggeredRef = useRef(false);
@@ -61,7 +69,7 @@ export default function LoadingScreen() {
       clearInterval(quoteInterval);
       cancelAnimationFrame(frameId);
     };
-  }, [enableVideoPlay, finishLoading]);
+  }, [enableVideoPlay, finishLoading, loadingQuotes.length]);
 
   // Prevent background scrolling while loading screen is active
   useEffect(() => {
@@ -98,6 +106,11 @@ export default function LoadingScreen() {
             exit={{ opacity: 0, scale: 1.4, transition: { duration: 1.5, ease: "easeOut" } }}
             className="absolute w-80 h-80 sm:w-[450px] sm:h-[450px] rounded-full bg-[#fedacb]/35 blur-3xl -bottom-12 -right-12 pointer-events-none animate-pulse"
           />
+
+          {/* Top Right Quick Language Switcher */}
+          <div className="absolute top-6 right-6 z-20">
+            <LanguageSwitcher variant="pill" />
+          </div>
 
           <motion.div
             initial={{ scale: 0.92, opacity: 0, y: 15 }}
@@ -147,10 +160,10 @@ export default function LoadingScreen() {
             {/* Title & Tagline */}
             <div className="space-y-1 mb-6">
               <h1 className="text-2xl sm:text-3xl font-black text-[#694231] tracking-tight font-sans">
-                PURIN KOKOA
+                {t("loading.title")}
               </h1>
               <p className="text-xs font-bold text-[#c38a76] tracking-widest uppercase">
-                プリン・ココア • Fan Portal
+                {t("loading.subtitle")}
               </p>
             </div>
 
@@ -170,7 +183,7 @@ export default function LoadingScreen() {
               <div className="flex items-center justify-between text-[11px] font-mono font-bold text-[#694231]/75 px-1">
                 <span className="flex items-center gap-1 text-[#c38a76]">
                   <Sparkles className="w-3 h-3 text-[#fcaa94] animate-spin" />
-                  {progress >= 80 ? "Menyiapkan Player..." : "Loading..."}
+                  {progress >= 80 ? t("loading.preparing") : t("loading.loading")}
                 </span>
                 <span>{Math.floor(progress)}%</span>
               </div>

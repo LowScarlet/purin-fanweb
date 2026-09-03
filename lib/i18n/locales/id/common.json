@@ -1,0 +1,73 @@
+{
+  "nav": {
+    "news": "Berita",
+    "about": "Tentang",
+    "schedule": "Jadwal",
+    "community": "Komunitas",
+    "disclaimer": "Disclaimer",
+    "share": "BAGIKAN",
+    "sound": "SUARA",
+    "playBgm": "Putar BGM",
+    "muteBgm": "Bisukan BGM",
+    "volume": "Volume",
+    "menuTitle": "Purin Portal",
+    "menuBadge": "Menu",
+    "bgmPlaying": "BGM Berputar",
+    "bgmMuted": "BGM Dibisukan",
+    "social": "Sosial:"
+  },
+  "footer": {
+    "contact": "KONTAK",
+    "privacy": "KEBIJAKAN PRIVASI",
+    "purin": "Purin Kokoa",
+    "copyrightGuidelines": "著作権に関するガイドライン (Pedoman Hak Cipta)",
+    "rights": "Hak cipta dilindungi undang-undang."
+  },
+  "ticker": {
+    "live": "LIVE",
+    "view": "Lihat",
+    "drawerTitle": "Jadwal Siaran Terbaru & Mendatang",
+    "viewFull": "Lihat Jadwal Mingguan Lengkap →"
+  },
+  "carousel": {
+    "communityTitle": "Purin's Apse",
+    "communitySub": "Gabung Komunitas Discord Kami!",
+    "scheduleTitle": "Jadwal Stream Baru",
+    "scheduleSub": "Cek Jam Live Mingguan & Pengingat!",
+    "milestoneTitle": "50,000 Pelanggan!",
+    "milestoneSub": "Baca Pengumuman Perayaan Milestone"
+  },
+  "loading": {
+    "title": "PURIN KOKOA",
+    "subtitle": "プリン・ココア • Portal Fan",
+    "preparing": "Menyiapkan Player...",
+    "loading": "Memuat...",
+    "quotes": [
+      "Membuat cokelat hangat... 🍫",
+      "Menyiapkan pudding karamel... 🍮",
+      "Menghubungkan ke Purin's Apse... 🐱",
+      "Menata miniatur furnitur... 🪑",
+      "Memuat kenangan manis bersama Cocoanuts... ✨"
+    ]
+  },
+  "watermarks": {
+    "fanclub": "PURIN KOKOA OFFICIAL FAN CLUB",
+    "pururinPortal": "PURURIN VTUBER PORTAL",
+    "schedule": "PURIN KOKOA STREAM SCHEDULE",
+    "timetable": "PURURIN LIVE TIMETABLE",
+    "news": "PURIN KOKOA OFFICIAL NEWS",
+    "announcements": "PURURIN ANNOUNCEMENTS",
+    "community": "PURIN'S APSE FAN COMMUNITY",
+    "communityHub": "PURURIN COMMUNITY HUB",
+    "guidelines": "PURIN KOKOA FAN GUIDELINES",
+    "nonCommercial": "NON-COMMERCIAL FAN PROJECT"
+  },
+  "actions": {
+    "copy": "Salin",
+    "copied": "Tersalin!",
+    "readMore": "Baca Selengkapnya",
+    "back": "Kembali",
+    "join": "Gabung",
+    "explore": "Jelajahi"
+  }
+}

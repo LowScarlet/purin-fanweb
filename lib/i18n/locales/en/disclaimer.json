@@ -1,0 +1,25 @@
+{
+  "header": {
+    "badge": "Legal & Project Notices",
+    "title": "Disclaimer & Copyright Guidelines 🍮",
+    "subtitle": "PURIN KOKOA 著作権に関するガイドライン (Unofficial Fan-made Project Information)"
+  },
+  "sections": {
+    "nature": {
+      "title": "1. Nature of the Fan-Made Project",
+      "p1": "This portal website is an unofficial fan-made project created with love by the community to support and appreciate VTuber / Content Creator Purin Kokoa.",
+      "p2": "This website is completely non-commercial, not officially affiliated with management or agencies, and generates no direct commercial profit."
+    },
+    "copyright": {
+      "title": "2. Copyright & Character Ownership",
+      "p1": "All intellectual property rights regarding characters, VTuber 2D/3D model designs, names, voice recordings, and live stream content are the sole property of Purin Kokoa and/or official creators.",
+      "p2": "Illustrations, fanarts, and media assets displayed across this portal are credited to their original creators and used strictly for fan community promotion."
+    },
+    "takedown": {
+      "title": "3. Content Takedown & Modification Requests",
+      "p1": "If you are a copyright owner or official representative and wish to request modification or removal of specific assets or information, please contact the developer team via GitHub or community channels."
+    }
+  },
+  "developer": "Developer: LowScarlet & Pururin Community 🍮",
+  "github": "GitHub Repository"
+}

@@ -1,0 +1,54 @@
+{
+  "header": {
+    "badge": "Official Member Reference",
+    "subtitle": "Your Sweet & Cozy Pudding Chocolatier VTuber 🍮🍫"
+  },
+  "specs": {
+    "birthday": "Birthday",
+    "height": "Height",
+    "debut": "Debut",
+    "fanbase": "Fanbase"
+  },
+  "lore": {
+    "title": "Official Lore & Background",
+    "p1": "Purin Kokoa is a half-cat-half-human chocolatier. She was once an abandoned cat who was warmly adopted by a skilled chocolatier.",
+    "p2": "Driven by deep admiration for her owner, she always dreamed of becoming a chocolatier and serving customers herself. One day while wandering, she got lost in an enchanted forest and met a purple-haired fairy godmother who offered to grant her wish.",
+    "p3": "✨ She joyfully said yes, and now she is a full-fledged chocolatier running her own chocolate shop. Come and visit her cozy chocolaterie! 🍮"
+  },
+  "reference": {
+    "title": "Character Reference Sheet",
+    "desc": "Official VTuber model design for Purin Kokoa: front, side, back view, chocolate bow accessories, and facial expressions.",
+    "openOriginal": "Open Original Resolution",
+    "clickZoom": "Click to Zoom Full Resolution"
+  },
+  "palette": {
+    "title": "Official Color Palette",
+    "badge": "Click to Copy",
+    "desc": "Official color palette guide for fanart, graphic design, and community assets. Click any chip to copy hex code.",
+    "peach": "Peach Coral (Primary Accent)",
+    "terracotta": "Rose Terracotta (Secondary)",
+    "cocoa": "Deep Cocoa (Dark Base)"
+  },
+  "hashtags": {
+    "title": "Official Hashtags & Fanmark",
+    "badge": "Click to Copy",
+    "desc": "Use these official hashtags when posting fanart, sharing clips, or chatting during streams!",
+    "general": "General Tag",
+    "live": "Live Stream",
+    "fanart": "Fanart / Artworks",
+    "clips": "Clips & Shorts",
+    "mark": "Official Fanmark"
+  },
+  "soundboard": {
+    "title": "Voice Clips & Soundboard",
+    "badge": "Click to Play",
+    "desc": "A collection of Purin's signature greetings, cute voice lines, and stream meme clips. Click to play sound effects!"
+  },
+  "rules": {
+    "title": "Streaming Rules & Etiquette",
+    "desc": "Guidelines for enjoying Purin Kokoa's live streams in a cozy, friendly, and respectful environment:"
+  },
+  "journey": {
+    "title": "Journey & Milestones"
+  }
+}

@@ -24,13 +24,12 @@ export default function TypingText({
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   useEffect(() => {
-    setDisplayedText("");
-    setIsTypingComplete(false);
-
-    let timeoutId: NodeJS.Timeout;
     let intervalId: NodeJS.Timeout;
 
-    timeoutId = setTimeout(() => {
+    const timeoutId = setTimeout(() => {
+      setDisplayedText("");
+      setIsTypingComplete(false);
+
       let currentIndex = 0;
       intervalId = setInterval(() => {
         if (currentIndex < text.length) {

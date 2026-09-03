@@ -1,23 +1,41 @@
+"use client";
+
 import Link from "next/link";
 import { SiNextdotjs, SiTailwindcss, SiVercel } from "react-icons/si";
+import { useTranslation, useCurrentLocale } from "@/lib/i18n/client";
+import LanguageSwitcher from "../ui/LanguageSwitcher";
 
 export default function Footer() {
+  const { t } = useTranslation("common");
+  const locale = useCurrentLocale();
+
   return (
     <footer className="flex flex-col md:flex-row justify-between items-start md:items-center px-8 py-8 font-semibold text-neutral-500 text-xs uppercase select-none border-t border-[#c38a76]/20 bg-white gap-6">
       <div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <Link href="/" className="hover:text-[#c38a76] transition-colors">EN</Link>
-          <Link href="/" className="hover:text-[#c38a76] transition-colors">ID</Link>
+          <LanguageSwitcher variant="inline" />
           <div className="text-neutral-300">|</div>
-          <Link href="/" className="hover:text-[#c38a76] transition-colors">Purin Kokoa</Link>
-          <Link href="/community" className="hover:text-[#c38a76] transition-colors">CONTACT</Link>
-          <Link href="/disclaimer" className="hover:text-[#c38a76] transition-colors">PRIVACY POLICY</Link>
+          <Link href={`/${locale}`} className="hover:text-[#c38a76] transition-colors">
+            {t("footer.purin")}
+          </Link>
+          <Link href={`/${locale}/community`} className="hover:text-[#c38a76] transition-colors">
+            {t("footer.contact")}
+          </Link>
+          <Link href={`/${locale}/disclaimer`} className="hover:text-[#c38a76] transition-colors">
+            {t("footer.privacy")}
+          </Link>
         </div>
         <div className="space-x-2 mt-4 font-semibold">
-          <Link href="/about" className="text-[#c38a76] hover:underline">Purin Kokoa</Link>
-          <Link href="/disclaimer" className="text-[#c38a76] hover:underline">著作権に関するガイドライン</Link>
+          <Link href={`/${locale}/about`} className="text-[#c38a76] hover:underline">
+            Purin Kokoa
+          </Link>
+          <Link href={`/${locale}/disclaimer`} className="text-[#c38a76] hover:underline">
+            {t("footer.copyrightGuidelines")}
+          </Link>
         </div>
-        <p className="text-[0.8em] text-neutral-400 normal-case mt-1">© LowScarlet 2024–2026. All rights reserved.</p>
+        <p className="text-[0.8em] text-neutral-400 normal-case mt-1">
+          © LowScarlet 2024–2026. {t("footer.rights")}
+        </p>
       </div>
 
       {/* Tech Stack Icons matching original prototype */}
